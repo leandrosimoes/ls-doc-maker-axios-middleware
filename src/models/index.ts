@@ -1,11 +1,3 @@
-class LsDoc {
-    public __ls_docs__: Array<Doc>
-
-    constructor() {
-        this.__ls_docs__ = new Array<Doc>()
-    }
-}
-
 class Doc {
     public title: string
     public url: string
@@ -95,7 +87,6 @@ class Response {
 }
 
 export {
-    LsDoc,
     Doc,
     Group,
     Item,

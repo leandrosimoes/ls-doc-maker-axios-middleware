@@ -1,5 +1,5 @@
 import { Item, Header, Parameter, Response } from './models'
-import qs from 'qs';
+import { parse } from 'qs'
 import { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
 import * as _ from 'lodash'
 
@@ -21,7 +21,7 @@ function mapParametersToParameterClasses(parameters: Array<Parameter> | string |
     let parsedParams: any = parameters
 
     if (typeof parameters === 'string') {
-        parsedParams = qs.parse(parameters)
+        parsedParams = parse(parameters)
     }
 
     let result = new Array<Parameter>()

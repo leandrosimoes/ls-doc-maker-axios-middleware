@@ -2,7 +2,8 @@
   "name": "ls-doc-maker-axios-middeware",
   "version": "1.0.0",
   "description": "Axios Middleware To Generate a LS Doc Maker Json Automatically",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build-prod": "webpack --mode production",
     "build-dev": "webpack --mode development",
@@ -21,6 +22,9 @@
   "license": "MIT",
   "dependencies": {
     "@types/fs-extra": "^5.0.4",
+    "@types/lodash": "^4.14.118",
+    "@types/node": "^10.12.10",
+    "@types/qs": "^6.5.1",
     "@types/uuid": "^3.4.4",
     "axios": "^0.18.0",
     "fs-extra": "^7.0.1",
@@ -30,8 +34,6 @@
   },
   "devDependencies": {
     "@types/jasmine": "^2.8.9",
-    "@types/lodash": "^4.14.118",
-    "@types/qs": "^6.5.1",
     "jasmine": "^3.2.0",
     "ts-loader": "^5.2.1",
     "ts-node": "^7.0.1",

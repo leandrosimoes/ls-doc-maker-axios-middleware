@@ -1,7 +1,7 @@
-import { AxiosInstance } from 'axios'
+import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { createFileSync, writeFileSync, existsSync, removeSync, readdirSync, readFileSync } from 'fs-extra';
 import { forEach, reduce } from 'lodash';
-import uuidv4 from 'uuid/v4'
+import { v4 as uuidv4 } from 'uuid'
 
 import { parseAxiosRequest, parseAxiosResponse, parseAxiosError } from './axios-parser'
 import { Doc, Group, Item } from './models'
@@ -31,21 +31,21 @@ class LsDocMakerAxiosMiddleware {
     constructor(axiosInstance: AxiosInstance) {
         this.items = null
 
-        axiosInstance.interceptors.request.use(config => {
+        axiosInstance.interceptors.request.use((config:AxiosRequestConfig) => {
             this.items = parseAxiosRequest(config, this.items)
 
             return config
-        }, error => {
+        }, (error:any) => {
             this.items = parseAxiosError(error, this.items)
 
             return Promise.reject(error)
         });
 
-        axiosInstance.interceptors.response.use(response => {
+        axiosInstance.interceptors.response.use((response:AxiosResponse) => {
             this.items = parseAxiosResponse(response, this.items)
 
             return response;
-        }, error => {
+        }, (error:any) => {
             this.items = parseAxiosError(error, this.items)
 
             return Promise.reject(error)
