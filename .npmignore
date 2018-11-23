@@ -1,0 +1,8 @@
+docs/
+node_modules/
+src/
+.circleci/
+spec/
+tsconfig.json
+webpack.config.js
+.travis.yml
