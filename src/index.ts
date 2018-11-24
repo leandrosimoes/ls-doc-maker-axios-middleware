@@ -15,7 +15,7 @@ class LsDocMakerAxiosMiddlewareBuildOptions {
     public _observation: string
     public _clearJsonFilesAfterBuild: boolean
 
-    constructor(itemsPaths: Array<string>, outputPath:string, title: string, url: string, observation: string, clearJsonFilesAfterBuild: boolean = false) {
+    constructor(itemsPaths: Array<string>, outputPath: string, title: string, url: string, observation: string, clearJsonFilesAfterBuild: boolean = false) {
         this._itemsPaths = itemsPaths
         this._outputPath = outputPath
         this._title = title
@@ -27,29 +27,42 @@ class LsDocMakerAxiosMiddlewareBuildOptions {
 
 class LsDocMakerAxiosMiddleware {
     public items: Array<Item> | null
+    private _active: boolean
 
     constructor(axiosInstance: AxiosInstance) {
         this.items = null
+        this._active = true
 
-        axiosInstance.interceptors.request.use((config:AxiosRequestConfig) => {
-            this.items = parseAxiosRequest(config, this.items)
+        axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {
+            if (this._active)
+                this.items = parseAxiosRequest(config, this.items)
 
             return config
-        }, (error:any) => {
+        }, (error: any) => {
             this.items = parseAxiosError(error, this.items)
 
             return Promise.reject(error)
         });
 
-        axiosInstance.interceptors.response.use((response:AxiosResponse) => {
-            this.items = parseAxiosResponse(response, this.items)
+        axiosInstance.interceptors.response.use((response: AxiosResponse) => {
+            if (this._active)
+                this.items = parseAxiosResponse(response, this.items)
 
             return response;
-        }, (error:any) => {
-            this.items = parseAxiosError(error, this.items)
+        }, (error: any) => {
+            if (this._active)
+                this.items = parseAxiosError(error, this.items)
 
             return Promise.reject(error)
         });
+    }
+
+    pauseListening() {
+        this._active = false
+    }
+
+    resumeListening() {
+        this._active = true
     }
 
     toJsonFile(path: string): void {

@@ -11,7 +11,10 @@ declare class LsDocMakerAxiosMiddlewareBuildOptions {
 }
 declare class LsDocMakerAxiosMiddleware {
     items: Array<Item> | null;
+    private _active;
     constructor(axiosInstance: AxiosInstance);
+    pauseListening(): void;
+    resumeListening(): void;
     toJsonFile(path: string): void;
     clearJsonFiles(path: string): void;
 }

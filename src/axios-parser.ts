@@ -1,7 +1,8 @@
 import { Item, Header, Parameter, Response } from './models'
 import { parse } from 'qs'
 import { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
-import * as _ from 'lodash'
+import { uniqBy, isEqual } from 'lodash';
+import { URL } from 'url'
 
 function mapHeadersToHeaderClasses(headers: any | null, currentHeaders: Array<Header> | null = null): Array<Header> | null {
     if (!headers) return null
@@ -39,31 +40,20 @@ function parseAxiosRequest(axiosRequest: AxiosRequestConfig | null, previewItems
 
     if (!previewItems) previewItems = new Array<Item>()
 
-    // previewDoc.title = `Documentation for ${axiosRequest.baseURL}`
-    // previewDoc.url = axiosRequest.baseURL || '/'
-    // previewDoc.observations = 'Documentation generated automatically by ls-doc-maker-axios-middleware'
+    let itemTitle = new URL(axiosRequest.baseURL + axiosRequest.url).pathname
 
-    // new Group(
-    //     axiosRequest.url || '/',
-    //     [
-    //         new Item(
-    //             axiosRequest.url || '',
-    //             'Item generated automatically by ls-doc-maker-axios-middleware',
-    //             axiosRequest.method || 'GET',
-    //             axiosRequest.url || '',
-    //             mapHeadersToHeaderClasses(axiosRequest.headers[axiosRequest.method || '']),
-    //             mapParametersToParameterClasses(axiosRequest.data)
-    //         )
-    //     ]
-    // )
+    while (itemTitle.match(/(\/)(\d{1,10})(\/?)/g)) {
+        itemTitle = itemTitle.replace(/(\/)(\d{1,10})(\/?)/g, '$1{code}$3')
+    }
 
-    let item = previewItems.find(i => i.title === axiosRequest.url)
+    let item = previewItems.find(i => i.title === itemTitle)
+
     if (!item) {
         previewItems.push(new Item(
-            axiosRequest.url || '',
+            itemTitle || '',
             'Item generated automatically by ls-doc-maker-axios-middleware',
             axiosRequest.method || 'GET',
-            axiosRequest.url || '',
+            itemTitle || '',
             mapHeadersToHeaderClasses(axiosRequest.headers[axiosRequest.method || '']),
             mapParametersToParameterClasses(axiosRequest.data)
         ))
@@ -71,8 +61,8 @@ function parseAxiosRequest(axiosRequest: AxiosRequestConfig | null, previewItems
         item.headers = mapHeadersToHeaderClasses(axiosRequest.headers[axiosRequest.method || ''], item.headers)
         item.parameters = mapParametersToParameterClasses(axiosRequest.data)
 
-        item.headers = _.uniqBy(item.headers, "key")
-        item.parameters = _.uniqBy(item.parameters, "key")
+        item.headers = uniqBy(item.headers, "key")
+        item.parameters = uniqBy(item.parameters, "key")
     }
 
     return previewItems
@@ -81,7 +71,13 @@ function parseAxiosRequest(axiosRequest: AxiosRequestConfig | null, previewItems
 function parseAxiosResponse(axiosResponse: AxiosResponse | null, previewItems: Array<Item> | null): Array<Item> {
     if (!axiosResponse || !previewItems) return new Array<Item>()
 
-    let item = previewItems.find(i => i.title === axiosResponse.request.path)
+    let itemTitle = new URL(axiosResponse.config.url).pathname
+
+    while (itemTitle.match(/(\/)(\d{1,10})(\/?)/g)) {
+        itemTitle = itemTitle.replace(/(\/)(\d{1,10})(\/?)/g, '$1{code}$3')
+    }
+    
+    let item = previewItems.find(i => i.title === itemTitle)
 
     if (!item) return previewItems
 
@@ -90,13 +86,13 @@ function parseAxiosResponse(axiosResponse: AxiosResponse | null, previewItems: A
             new Response('Item generated automatically by ls-doc-maker-axios-middleware', axiosResponse.status, axiosResponse.data)
         ]
     } else {
-        let response = item.responses.find(r => r.code === axiosResponse.status)
+        let response = item.responses.find(r => r.code === axiosResponse.status && isEqual(r.schema, axiosResponse.data))
         if (!response) {
             item.responses.push(new Response('Item generated automatically by ls-doc-maker-axios-middleware', axiosResponse.status, axiosResponse.data))
         }
     }
 
-    item.responses = _.uniqBy(item.responses, "code")
+    item.responses = uniqBy(item.responses, "code")
 
     return previewItems
 }
