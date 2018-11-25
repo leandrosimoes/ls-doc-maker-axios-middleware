@@ -43,7 +43,7 @@ function parseAxiosRequest(axiosRequest: AxiosRequestConfig | null, previewItems
     let itemTitle = new URL(axiosRequest.baseURL + axiosRequest.url).pathname
 
     while (itemTitle.match(/(\/)(\d{1,10})(\/?)/g)) {
-        itemTitle = itemTitle.replace(/(\/)(\d{1,10})(\/?)/g, '$1{code}$3')
+        itemTitle = itemTitle.replace(/(\/)(\d{1,10})(\/?)/g, '$1{some_id}$3')
     }
 
     let item = previewItems.find(i => i.title === itemTitle)

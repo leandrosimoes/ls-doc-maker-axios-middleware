@@ -9,6 +9,10 @@
     "build-dev": "webpack --mode development",
     "test": "ts-node node_modules/jasmine/bin/jasmine"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leandrosimoes/ls-doc-maker-axios-middleware.git"
+  },
   "keywords": [
     "axios",
     "middleware",
@@ -20,6 +24,10 @@
   ],
   "author": "Leandro Simões <leandro.simoes@outlook.com>",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/leandrosimoes/ls-doc-maker-axios-middleware/issues"
+  },
+  "homepage": "https://github.com/leandrosimoes/ls-doc-maker-axios-middleware#readme",
   "dependencies": {
     "@types/fs-extra": "^5.0.4",
     "@types/lodash": "^4.14.118",
