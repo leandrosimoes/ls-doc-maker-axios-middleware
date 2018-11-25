@@ -20,4 +20,4 @@ declare class LsDocMakerAxiosMiddleware {
 }
 declare function attatchLsDocMaker(axiosInstance: AxiosInstance): LsDocMakerAxiosMiddleware;
 declare function buildLsDocMaker(options: LsDocMakerAxiosMiddlewareBuildOptions): Doc;
-export { attatchLsDocMaker, buildLsDocMaker, LsDocMakerAxiosMiddlewareBuildOptions };
+export { attatchLsDocMaker, buildLsDocMaker, LsDocMakerAxiosMiddleware, LsDocMakerAxiosMiddlewareBuildOptions };

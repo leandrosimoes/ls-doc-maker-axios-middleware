@@ -66,7 +66,7 @@ class LsDocMakerAxiosMiddleware {
     }
 
     toJsonFile(path: string): void {
-        if (!path) throw new Error('File path must be provided')
+        if (!path) throw new Error('Files path must be provided')
 
         let filePath = `${path}\\${__ls_path__}\\${uuidv4()}.json`
         createFileSync(filePath)
@@ -74,7 +74,7 @@ class LsDocMakerAxiosMiddleware {
     }
 
     clearJsonFiles(path: string): void {
-        if (!path) throw new Error('File path must be provided')
+        if (!path) throw new Error('Files path must be provided')
 
         if (existsSync(`${path}/${__ls_path__}`)) {
             removeSync(`${path}/${__ls_path__}`)
@@ -139,5 +139,6 @@ function buildLsDocMaker(options: LsDocMakerAxiosMiddlewareBuildOptions): Doc {
 export {
     attatchLsDocMaker,
     buildLsDocMaker,
+    LsDocMakerAxiosMiddleware,
     LsDocMakerAxiosMiddlewareBuildOptions
 }
