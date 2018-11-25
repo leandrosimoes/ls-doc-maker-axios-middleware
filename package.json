@@ -1,5 +1,5 @@
 {
-  "name": "ls-doc-maker-axios-middeware",
+  "name": "ls-doc-maker-axios-middleware",
   "version": "1.0.0",
   "description": "Axios Middleware To Generate a LS Doc Maker Json Automatically",
   "main": "dist/index.js",
