@@ -1,10 +1,11 @@
 {
   "name": "ls-doc-maker-axios-middleware",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Axios Middleware To Generate a LS Doc Maker Json Automatically",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "build": "webpack --mode production",
     "build-prod": "webpack --mode production",
     "build-dev": "webpack --mode development",
     "test": "ts-node node_modules/jasmine/bin/jasmine"
@@ -29,24 +30,24 @@
   },
   "homepage": "https://github.com/leandrosimoes/ls-doc-maker-axios-middleware#readme",
   "dependencies": {
-    "@types/fs-extra": "^5.0.4",
-    "@types/lodash": "^4.14.118",
-    "@types/node": "^10.12.10",
-    "@types/qs": "^6.5.1",
-    "@types/uuid": "^3.4.4",
-    "axios": "^0.18.0",
-    "fs-extra": "^7.0.1",
-    "lodash": "^4.17.11",
-    "qs": "^6.5.2",
-    "uuid": "^3.3.2"
+    "@types/fs-extra": "^8.0.1",
+    "@types/lodash": "^4.14.144",
+    "@types/node": "^12.11.1",
+    "@types/qs": "^6.5.3",
+    "@types/uuid": "^3.4.5",
+    "axios": "^0.19.0",
+    "fs-extra": "^8.1.0",
+    "lodash": "^4.17.15",
+    "qs": "^6.9.0",
+    "uuid": "^3.3.3"
   },
   "devDependencies": {
-    "@types/jasmine": "^2.8.9",
-    "jasmine": "^3.2.0",
-    "ts-loader": "^5.2.1",
-    "ts-node": "^7.0.1",
-    "typescript": "^3.1.1",
-    "webpack": "^4.20.2",
-    "webpack-cli": "^3.1.2"
+    "@types/jasmine": "^3.4.4",
+    "jasmine": "^3.5.0",
+    "ts-loader": "^6.2.0",
+    "ts-node": "^8.4.1",
+    "typescript": "^3.6.4",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9"
   }
 }
