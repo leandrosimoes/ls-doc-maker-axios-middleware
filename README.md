@@ -2,6 +2,8 @@
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/cadc1cc0e7724c49bc1795ab9b5b162d)](https://app.codacy.com/app/leandrosimoes/ls-doc-maker-axios-middleware?utm_source=github.com&utm_medium=referral&utm_content=leandrosimoes/ls-doc-maker-axios-middleware&utm_campaign=Badge_Grade_Dashboard)
 [![npm version](https://badge.fury.io/js/ls-doc-maker-axios-middleware.svg)](https://badge.fury.io/js/ls-doc-maker-axios-middleware)
+![Node CI](https://github.com/leandrosimoes/ls-doc-maker-axios-middleware/workflows/Node%20CI/badge.svg)
+![Node.js Package](https://github.com/leandrosimoes/ls-doc-maker-axios-middleware/workflows/Node%2Ejs%20Package/badge.svg)
 
 A axios middleware to automatticaly create Ls Doc Maker json from axios requests
 
