@@ -4,7 +4,12 @@ class Doc {
     public observations: string
     public groups: Array<Group>
 
-    constructor(title: string, url: string, observations: string, groups: Array<Group> = new Array<Group>()) {
+    constructor(
+        title: string,
+        url: string,
+        observations: string,
+        groups: Array<Group> = new Array<Group>()
+    ) {
         this.title = title
         this.url = url
         this.observations = observations
@@ -38,8 +43,8 @@ class Item {
         path: string,
         headers: Array<Header> | null = null,
         parameters: Array<Parameter> | null = null,
-        responses: Array<Response> | null = null) {
-
+        responses: Array<Response> | null = null
+    ) {
         this.title = title
         this.description = description
         this.type = type.toUpperCase()
@@ -86,11 +91,4 @@ class Response {
     }
 }
 
-export {
-    Doc,
-    Group,
-    Item,
-    Header,
-    Parameter,
-    Response
-}
+export { Doc, Group, Item, Header, Parameter, Response }
